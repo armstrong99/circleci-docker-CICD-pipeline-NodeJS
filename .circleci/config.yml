@@ -26,11 +26,7 @@ jobs:
       - run: 
           name: Archieve Docker Image
           command: docker save -o  image.tar $IMAGE_NAME
-      - persist-to-workspace:
-          root: .
-          paths: 
-            - ./image.tar
-
+ 
 
   publishLatestToHub: 
       executor: docker-publisher
