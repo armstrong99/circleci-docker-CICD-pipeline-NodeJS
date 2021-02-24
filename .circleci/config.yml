@@ -15,8 +15,7 @@ executors:
 jobs:
     publishLatestToHub: 
       executor: docker-publisher
-      working_directory: ~/$CIRCLE_WORKING_DIRECTORY
-
+ 
       steps: 
          - run: 
             name: Publish Docker Image to Docker Hub
