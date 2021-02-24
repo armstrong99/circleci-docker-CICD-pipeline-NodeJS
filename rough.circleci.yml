@@ -56,11 +56,10 @@ workflows:
             branches: 
               only: main
       - publishLatestToHub: 
-         requires:
-           - buildContainer4Server
-          filters:
-              branches: 
-                only: main
+          requires:
+            - buildContainer4Server
+                
+                 
              
     
        
