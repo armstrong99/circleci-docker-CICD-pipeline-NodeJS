@@ -43,8 +43,7 @@ workflows:
   build-master:
     jobs:
        - publishLatestToHub: 
-          requires:
-            - buildContainer4Server
+          
                 
                  
              
