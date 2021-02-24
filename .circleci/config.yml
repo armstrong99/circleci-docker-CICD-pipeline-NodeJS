@@ -18,7 +18,7 @@ jobs:
 
     executor: docker-publisher
 
-    working_directory: ~/server
+    working_directory: ~/project
 
     steps:
       - checkout
@@ -31,27 +31,18 @@ jobs:
   publishLatestToHub: 
       executor: docker-publisher
       steps: 
-        - attach_workspace:
-            at: /tmp/workspace
-        - setup_remote_docker
-        - run:
-            name: Load archieved Docker image
-            command: docker load -i /tmp/workspace/image.tar
-        - run: 
+         - run: 
             name: Publish Docker Image to Docker Hub
             command: |
               echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+              docker build -t $IMAGE_NAME .
               docker push $IMAGE_NAME:latest
 
 workflows:
   version: 2
   build-master:
     jobs:
-      - buildContainer4Server:
-          filters:
-            branches: 
-              only: main
-      - publishLatestToHub: 
+       - publishLatestToHub: 
           requires:
             - buildContainer4Server
                 
