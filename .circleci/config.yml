@@ -1,5 +1,8 @@
 orbs:
   docker: circleci/docker@1.5.0
+  auth:
+        username: $DOCKERHUB_USERNAME
+        password: $DOCKERHUB_PASSWORD
 version: 2.1
 
  
