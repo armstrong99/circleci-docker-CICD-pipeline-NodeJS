@@ -1,28 +1,13 @@
 orbs:
   docker: circleci/docker@1.5.0
-  auth:
-        username: $DOCKERHUB_USERNAME
-        password: $DOCKERHUB_PASSWORD
+   
 version: 2.1
 
  
-jobs:
-  build-and-push:
-    executor: docker/docker
-    steps:
-      - setup_remote_docker
-      - checkout
-      - docker/check
-      - docker/build:
-          image: ndukwearm19docker/orb-test
-      - docker/push:
-          digest-path: /tmp/digest.txt
-          image: ndukwearm19docker/orb-test
-      - run:
-          command: |
-            echo "Digest is: $(</tmp/digest.txt)"
  
 workflows:
-  commit:
+  build-docker-image-only:
     jobs:
-      - build-and-push
+      - docker/publish:
+          image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+          update-description: true
