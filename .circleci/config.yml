@@ -13,22 +13,7 @@ executors:
             password: $DOCKERHUB_PASSWORD
 
 jobs:
-    
-  buildContainer4Server:
-
-    executor: docker-publisher
-
-    working_directory: ~/project
-
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run: 
-          name: Archieve Docker Image
-          command: docker save -o  image.tar $IMAGE_NAME
- 
-
-  publishLatestToHub: 
+    publishLatestToHub: 
       executor: docker-publisher
       steps: 
          - run: 
@@ -42,7 +27,7 @@ workflows:
   version: 2
   build-master:
     jobs:
-       - publishLatestToHub: 
+       - publishLatestToHub
           
                 
                  
